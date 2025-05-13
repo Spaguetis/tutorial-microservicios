@@ -38,8 +38,15 @@ app.post("/validar", function (req, res) {
     let Correo = data.correo_electronico;
     let Key = data.pass;
 
-    let register = `
-        INSERT INTO informacion_cliente 
+    let search = "SELECT * FROM informacion_cliente WHERE rut = "+cedula+" ";
+    conexion.query(search,function(error,row){
+        if(error){
+            console.error("error al registar, ya existe");
+        }else{
+            if(row.length>0){
+                console.log("Usuario ya existe");
+            }else{
+                let register = `INSERT INTO informacion_cliente 
         (RUT, nombre, primer_apellido, direccion, correo_electronico, password) 
         VALUES (?, ?, ?, ?, ?, ?)`;
 
@@ -54,6 +61,11 @@ app.post("/validar", function (req, res) {
             res.send("Registro exitoso");
         }
     });
+            };
+        };
+    });
+
+    
 });
 
 app.listen(3000, function () {
