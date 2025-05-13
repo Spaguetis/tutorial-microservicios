@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+
+    
+
+</head>
+<body>
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+
+        <form action="/login" method="POST">
+            <label for="rut">RUT:</label>
+            <input type="text" id="rut" name="rut" required>
+
+            <label for="pass">Contraseña:</label>
+            <input type="password" id="pass" name="pass" required>
+
+            <button type="submit">Entrar</button>
+        </form>
+
+        <div class="link">
+            ¿Todavía no te has registrado? <a href="/">Regístrate aquí</a>
+        </div>
+    </div>
+</body>
+</html>
