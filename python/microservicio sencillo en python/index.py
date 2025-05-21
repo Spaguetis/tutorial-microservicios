@@ -10,7 +10,7 @@ conection = mysql.connector.connect(
 
 cursor = conection.cursor()
 
-new_user = ('234536755','gerda','andux','Tarapaca 890','gerdaandux123@gmail.com','password123')
+new_user = ('615374173','josue','andux','Tarapaca 890','josueandux123@gmail.com','password123456')
 
 query = 'INSERT INTO info (RUT,nombre,Primerapellido,direccion,correo,clave) Values(%s,%s,%s,%s,%s,%s)'
 
