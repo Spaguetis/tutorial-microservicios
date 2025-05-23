@@ -1,4 +1,5 @@
 import mysql.connector
+from datetime import date
 
 def conectar_bd():
     return mysql.connector.connect(
@@ -83,9 +84,9 @@ def buscar_producto_por_nombre():
     conexion.close()
 
 def insertar_producto():
-    nombre= input("Nombre del producto")
-    descripcion = input("Breve descripcion")
-    precio = input("precio")
+    nombre= input("Nombre del producto: ")
+    descripcion = input("Breve descripcion: ")
+    precio = input("precio: ")
     
     conexion = conectar_bd ()
     cursor = conexion.cursor()
@@ -94,8 +95,64 @@ def insertar_producto():
         INSERT INTO productos (nombre, descripcion, precio)
         VALUES (%s, %s, %s)
     """
-    cursor.execute(query(nombre,descripcion,precio))
+    cursor.execute(query, (nombre,descripcion,precio))
     conexion.commit()
+
+    cursor.close()
+    conexion.close()
+
+def insertar_venta():
+    id_producto = input("ID del producto vendido: ")
+    cantidad = input("ingrese cantidad vendida: ")
+
+    conexion = conectar_bd()
+    cursor = conexion.cursor()
+
+    # Obtener precio del producto
+    cursor.execute("SELECT precio FROM productos WHERE id = %s", (id_producto,))
+    resultado = cursor.fetchone()
+
+    if not resultado:
+        print("Producto no encontrado.")
+        cursor.close()
+        conexion.close()
+        return
+    
+    precio = resultado[0]
+    total = precio * cantidad
+    fecha_actual = date.today()
+
+    # Insertar venta
+    cursor.execute("""
+        INSERT INTO ventas (fecha, id_producto, cantidad, total)
+        VALUES (%s, %s, %s, %s)
+    """, (fecha_actual, id_producto, cantidad, total))
+
+    # Actualizar stock: buscar stock más reciente para el producto
+    cursor.execute("""
+        SELECT cantidad, fecha, ubicacion
+        FROM stock
+        WHERE id_producto = %s
+        ORDER BY fecha DESC
+        LIMIT 1
+    """, (id_producto,))
+    stock_data = cursor.fetchone()
+
+    if not stock_data:
+        print("Este producto no tiene stock registrado. No se actualiza stock.")
+    else:
+        cantidad_actual, fecha_stock, ubicacion = stock_data
+        nuevo_stock = cantidad_actual - cantidad
+        if nuevo_stock < 0:
+            print("¡Advertencia! No hay suficiente stock. Venta registrada, pero el stock quedó negativo.")
+        # Insertar nueva entrada de stock con la cantidad actualizada
+        cursor.execute("""
+            INSERT INTO stock (id_producto, fecha, cantidad, ubicacion)
+            VALUES (%s, %s, %s, %s)
+        """, (id_producto, fecha_actual, nuevo_stock, ubicacion))
+
+    conexion.commit()
+    print("Venta registrada exitosamente. Total: $", total)
 
     cursor.close()
     conexion.close()
@@ -111,7 +168,9 @@ def menu():
         print("2. Ver stock por producto")
         print("3. Ver ventas recientes")
         print("4. Buscar producto por nombre")
-        print("5. Salir")
+        print("5. Insertar nuevo producto")
+        print("6. Registrar nueva venta")
+        print("7. Salir")
 
         opcion = input("Seleccione una opción: ")
 
@@ -124,6 +183,10 @@ def menu():
         elif opcion == '4':
             buscar_producto_por_nombre()
         elif opcion == '5':
+            insertar_producto()  
+        elif opcion == '6':
+            insertar_venta()
+        elif opcion == '7':
             print("Saliendo del programa...")
             break
         else:
