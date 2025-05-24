@@ -3,6 +3,7 @@ import bcrypt
 from datetime import date
 
 
+
 # Función de conexión a la base de datos
 def conectar_bd():
     return mysql.connector.connect(
@@ -214,39 +215,60 @@ def insertar_stock():
     conexion.close()
 
 # Menú principal interactivo
-def menu():
+def menu_usuario(privilegio):
     while True:
         print("\n=== Menú Principal ===")
-        print("1. Ver todos los productos")
-        print("2. Ver stock por producto")
-        print("3. Ver ventas recientes")
-        print("4. Buscar producto por nombre")
-        print("5. Insertar nuevo producto")
-        print("6. Registrar nueva venta")
-        print("7. Insertar stock")
-        print("8. Salir")
+        if privilegio == 'admin':
+            print("1. Ver todos los productos")
+            print("2. Ver stock por producto")
+            print("3. Ver ventas recientes")
+            print("4. Buscar producto por nombre")
+            print("5. Insertar nuevo producto")
+            print("6. Registrar nueva venta")
+            print("7. Insertar stock")
+            print("8. Salir")
 
-        opcion = input("Seleccione una opción: ")
+            opcion = input("Seleccione una opción: ")
 
-        if opcion == '1':
-            ver_productos()
-        elif opcion == '2':
-            ver_stock_por_producto()
-        elif opcion == '3':
-            ver_ventas_recientes()
-        elif opcion == '4':
-            buscar_producto_por_nombre()
-        elif opcion == '5':
-            insertar_producto()
-        elif opcion == '6':
-            insertar_venta()
-        elif opcion == '7':
-            insertar_stock()
-        elif opcion == '8':
-            print("Saliendo del programa...")
-            break
+            if opcion == '1':
+                ver_productos()
+            elif opcion == '2':
+                ver_stock_por_producto()
+            elif opcion == '3':
+                ver_ventas_recientes()
+            elif opcion == '4':
+                buscar_producto_por_nombre()
+            elif opcion == '5':
+                insertar_producto()
+            elif opcion == '6':
+                insertar_venta()
+            elif opcion == '7':
+                insertar_stock()
+            elif opcion == '8':
+                print("Saliendo del programa...")
+                break
+            else:
+                print("Opción inválida. Intente de nuevo.")
+
+        elif privilegio == 'cliente':
+            print("1. Ver productos")
+            print("2. Buscar producto por nombre")
+            print("3. Salir")
+
+            opcion = input("Seleccione una opción: ")
+
+            if opcion == '1':
+                ver_productos()
+            elif opcion == '2':
+                buscar_producto_por_nombre()
+            elif opcion == '3':
+                print("Saliendo del programa...")
+                break
+            else:
+                print("Opción inválida. Intente de nuevo.")
         else:
-            print("Opción inválida. Intente de nuevo.")
+            print("❌ Privilegio no reconocido. Saliendo...")
+            break
 
 # Ejecutar el menú
 if __name__ == "__main__":

@@ -1,4 +1,6 @@
+import bcrypt
 import mysql.connector
+from mainshop import menu_usuario  # 👈 Importamos la función desde main.py
 
 def conectar_bd():
     return mysql.connector.connect(
@@ -8,42 +10,39 @@ def conectar_bd():
         database="tienda"
     )
 
-def login_cliente():
-    usuario = input("Ingrese su nombre de usuario: ")
-    contraseña = input("Ingrese su contraseña: ")
+def login():
+    print("=== Iniciar Sesión ===")
+    usuario = input("Usuario: ").strip()
+    contraseña = input("Contraseña: ").strip()
+
+    if not usuario or not contraseña:
+        print("❌ Usuario y contraseña son obligatorios.")
+        return
 
     conexion = conectar_bd()
     cursor = conexion.cursor()
 
-    query = """
-        SELECT id, usuario, rol
-        FROM usuarios
-        WHERE usuario = %s AND contraseña = %s AND rol = 'cliente'
-    """
-    cursor.execute(query, (usuario, contraseña))
+    # Buscar usuario en la tabla
+    cursor.execute("""
+        SELECT id, nombre, contraseña, rol
+        FROM usuarios_admin
+        WHERE usuario = %s
+    """, (usuario,))
     resultado = cursor.fetchone()
 
     if resultado:
-        print(f"\n¡Bienvenido, {usuario}!")
-        mostrar_productos()
+        user_id, nombre, hashed_password, rol = resultado
+
+        if bcrypt.checkpw(contraseña.encode('utf-8'), hashed_password.encode('utf-8')):
+            print(f"\n✅ Bienvenido {nombre} ({rol})")
+            menu_usuario(rol)  # 👈 Usamos la función dinámica desde main.py
+        else:
+            print("❌ Contraseña incorrecta.")
     else:
-        print("\nCredenciales incorrectas o no eres un cliente registrado.")
-
-    cursor.close()
-    conexion.close()
-
-def mostrar_productos():
-    conexion = conectar_bd()
-    cursor = conexion.cursor()
-    cursor.execute("SELECT nombre, descripcion, precio FROM productos")
-    productos = cursor.fetchall()
-
-    print("\n=== Productos Disponibles ===")
-    for p in productos:
-        print(f"Nombre: {p[0]}\nDescripción: {p[1]}\nPrecio: ${p[2]}\n---")
+        print("❌ Usuario no encontrado.")
 
     cursor.close()
     conexion.close()
 
 if __name__ == "__main__":
-    login_cliente()
+    login()
