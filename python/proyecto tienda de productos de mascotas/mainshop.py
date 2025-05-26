@@ -272,7 +272,7 @@ def menu_usuario(privilegio):
 
 # Ejecutar el menú
 if __name__ == "__main__":
-    menu()
+    menu_usuario()
 
 
 
