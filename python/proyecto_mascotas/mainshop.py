@@ -1,7 +1,7 @@
 import mysql.connector
 import bcrypt
 from datetime import date
-
+import flask 
 
 
 # Función de conexión a la base de datos
