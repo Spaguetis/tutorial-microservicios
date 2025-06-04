@@ -5,14 +5,13 @@ from tkinter import messagebox
 # --- Conexión a PostgreSQL ---
 def conectar_db():
     return psycopg2.connect(
-        host="TU_HOST",           # Ej: 'localhost'
-        port="TU_PUERTO",         # Ej: '5432'
-        user="TU_USUARIO",        # Ej: 'postgres'
-        password="TU_CONTRASEÑA", # Ej: '1234'
-        database="TU_BASE_DATOS"  # Ej: 'infraestructura_electrica'
+        host="TU_HOST",         
+        port="TU_PUERTO",         
+        user="TU_USUARIO",        
+        password="TU_CONTRASEÑA", 
+        database="TU_BASE_DATOS"  
     )
-
-# --- Lógica de inserción igual que el script anterior ---
+# --- inserción ---
 def registrar_poste():
     ubicacion = entry_ubicacion.get()
     cantidad_transformadores = entry_transformadores.get()
@@ -50,7 +49,7 @@ def registrar_poste():
             cursor.close()
             conn.close()
 
-# --- Función para reiniciar la interfaz ---
+# --- reiniciar la interfaz ---
 def limpiar_formulario():
     entry_ubicacion.delete(0, tk.END)
     entry_transformadores.delete(0, tk.END)
@@ -63,7 +62,7 @@ def limpiar_formulario():
 root = tk.Tk()
 root.title("Ingreso de datos del poste")
 
-# Campos iguales que el script en consola
+# Campos 
 tk.Label(root, text="Ubicación:").grid(row=0, column=0, sticky="e")
 entry_ubicacion = tk.Entry(root, width=50)
 entry_ubicacion.grid(row=0, column=1)
