@@ -1,0 +1,6 @@
+#product_start.magik
+
+_block
+    sw_product.magik_require("source_code/comun/utility.magik")
+    write(">> Proyecto Infraestructura Multiservicio cargado correctamente. <<\n")
+_endblock

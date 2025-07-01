@@ -1,0 +1,17 @@
+#poste.magik
+
+_class poste_electrico << gis_objet
+
+   _method poste_electrico.init()
+       _self.tipo := "MT"
+       _self.altura := 9.0
+       _self.estado : = "activo"
+    _endmethod
+
+
+    _method poste_electrico.es_transformador?()
+        _return _self.tipo = "transformador"
+    _endmethod
+
+
+_endclass

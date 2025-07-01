@@ -1,0 +1,5 @@
+#! startup.magik
+# Inicio de proyecto    
+
+magik_require("product_start")
+porduct_start.run()

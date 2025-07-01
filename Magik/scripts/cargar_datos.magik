@@ -1,0 +1,10 @@
+#cargar_datos.magik
+
+_block
+    write("Cargando datops de postes...\n")
+    sw_product.magik_require("source_code/electrico/poste.magik")
+
+    poste1 << poste_electrico.new()
+    poste1.altura := 8.5
+    write("Poste creado con altura: " & poste1.altura & "\n")
+_endblock
