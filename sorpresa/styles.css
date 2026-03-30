@@ -1,0 +1,191 @@
+:root {
+  --bg-0: #02030b;
+  --bg-1: #0a0f22;
+  --bg-2: #180c2e;
+  --name: #f7f5ff;
+  --heart: #ff4fa8;
+  --heart-soft: #ffe08f;
+  --mx: 0.5;
+  --my: 0.5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+  font-family: Manrope, Segoe UI, sans-serif;
+  background:
+    radial-gradient(circle at 12% 14%, rgba(255, 93, 183, 0.28), transparent 36%),
+    radial-gradient(circle at 84% 20%, rgba(64, 229, 255, 0.25), transparent 40%),
+    radial-gradient(circle at 56% 88%, rgba(145, 104, 255, 0.22), transparent 45%),
+    radial-gradient(circle at 24% 82%, rgba(71, 255, 186, 0.14), transparent 38%),
+    linear-gradient(140deg, var(--bg-0), var(--bg-1), var(--bg-2));
+}
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: -18%;
+  pointer-events: none;
+}
+
+body::before {
+  background:
+    radial-gradient(ellipse at 20% 25%, rgba(255, 111, 198, 0.18), transparent 42%),
+    radial-gradient(ellipse at 80% 15%, rgba(120, 217, 255, 0.18), transparent 44%),
+    radial-gradient(ellipse at 60% 80%, rgba(157, 117, 255, 0.16), transparent 40%);
+  filter: blur(14px) saturate(120%);
+  animation: haze-pulse 6.5s ease-in-out infinite;
+  transform: translate(
+    calc((var(--mx) - 0.5) * 26px),
+    calc((var(--my) - 0.5) * 18px)
+  );
+}
+
+body::after {
+  background:
+    radial-gradient(circle at calc(var(--mx) * 100%) calc(var(--my) * 100%), rgba(255, 255, 255, 0.08), transparent 36%),
+    radial-gradient(circle at 50% 50%, transparent 56%, rgba(0, 0, 0, 0.62) 100%);
+}
+
+#garden {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  filter: saturate(122%) contrast(108%);
+}
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+.intro.hidden {
+  opacity: 0;
+  transform: translateY(-6px) scale(0.98);
+  pointer-events: none;
+}
+
+.intro-name {
+  margin: 0;
+  font-family: Cinzel, serif;
+  font-size: clamp(1.25rem, 3.2vw, 1.95rem);
+  color: var(--name);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 22px rgba(255, 124, 202, 0.58),
+    0 0 44px rgba(102, 234, 255, 0.35);
+  animation: name-breathe 2.2s ease-in-out infinite;
+  transform: translate(
+    calc((var(--mx) - 0.5) * 14px),
+    calc((var(--my) - 0.5) * 8px)
+  );
+}
+
+.heart-btn {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  font-size: 0.98rem;
+  color: #fff6fc;
+  background:
+    radial-gradient(circle at 30% 30%, var(--heart-soft), rgba(255, 145, 192, 0.95) 45%, var(--heart) 100%);
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.18),
+    0 0 24px rgba(255, 116, 188, 0.7),
+    0 0 40px rgba(84, 233, 255, 0.3);
+  cursor: pointer;
+  animation: heart-pulse 1.3s ease-in-out infinite;
+  transition: transform 180ms ease;
+  transform: translate(
+      calc((var(--mx) - 0.5) * 8px),
+      calc((var(--my) - 0.5) * 8px)
+    )
+    scale(1);
+}
+
+.heart-btn:hover {
+  transform: translate(
+      calc((var(--mx) - 0.5) * 8px),
+      calc((var(--my) - 0.5) * 8px)
+    )
+    scale(1.08);
+}
+
+.heart-btn:active {
+  transform: translate(
+      calc((var(--mx) - 0.5) * 8px),
+      calc((var(--my) - 0.5) * 8px)
+    )
+    scale(0.97);
+}
+
+@keyframes heart-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 2px rgba(255, 255, 255, 0.18),
+      0 0 22px rgba(255, 116, 188, 0.5);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 2px rgba(255, 255, 255, 0.28),
+      0 0 32px rgba(255, 116, 188, 0.78);
+  }
+}
+
+@keyframes name-breathe {
+  0%,
+  100% {
+    opacity: 0.82;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes haze-pulse {
+  0%,
+  100% {
+    opacity: 0.68;
+  }
+
+  50% {
+    opacity: 0.95;
+  }
+}
+
+@media (max-width: 560px) {
+  .intro {
+    gap: 12px;
+  }
+
+  .heart-btn {
+    width: 38px;
+    height: 38px;
+  }
+}
