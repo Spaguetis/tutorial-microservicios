@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="t d">
+  <title id="t">Escena romantica para Valentina</title>
+  <desc id="d">Atardecer con corazones y una escena simbolica de cuidado y amor.</desc>
+
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffd3ba"/>
+      <stop offset="55%" stop-color="#ffb7c8"/>
+      <stop offset="100%" stop-color="#f39bb2"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f07e91"/>
+      <stop offset="100%" stop-color="#9d3d63"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff6ce"/>
+      <stop offset="100%" stop-color="#ffcd85"/>
+    </radialGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="760" fill="url(#sky)"/>
+  <circle cx="600" cy="250" r="105" fill="url(#sun)" opacity="0.95"/>
+  <circle cx="600" cy="250" r="140" fill="#fff3cf" opacity="0.35" filter="url(#soft)"/>
+
+  <path d="M0 520 C220 470 360 560 590 520 C760 490 980 560 1200 510 L1200 760 L0 760 Z" fill="url(#ground)"/>
+
+  <g opacity="0.3">
+    <circle cx="120" cy="120" r="7" fill="#ffffff"/>
+    <circle cx="220" cy="170" r="5" fill="#ffffff"/>
+    <circle cx="910" cy="120" r="6" fill="#ffffff"/>
+    <circle cx="1040" cy="180" r="5" fill="#ffffff"/>
+  </g>
+
+  <g fill="#fdf5f7" opacity="0.95">
+    <path d="M270 220c0-23 19-41 41-41 15 0 29 8 37 21 8-13 22-21 37-21 23 0 41 18 41 41 0 41-45 68-78 103-33-35-78-62-78-103z"/>
+    <path d="M860 240c0-18 15-33 33-33 12 0 23 7 29 17 6-10 17-17 29-17 18 0 33 15 33 33 0 32-36 53-62 80-26-27-62-48-62-80z"/>
+  </g>
+
+  <g transform="translate(500 350)">
+    <path d="M95 102c-10 24-33 39-58 39-31 0-57-24-59-55-3-33 23-61 56-61 21 0 39 10 50 27 11-17 29-27 50-27 33 0 59 28 56 61-2 31-28 55-59 55-25 0-48-15-58-39l11-7z" fill="#ffdce5" opacity="0.45"/>
+    <path d="M95 118c-22 0-38 14-41 33-3-19-19-33-41-33-24 0-43 20-43 44 0 44 47 72 84 109 37-37 84-65 84-109 0-24-19-44-43-44z" fill="#fff2f6" opacity="0.75"/>
+
+    <ellipse cx="42" cy="250" rx="44" ry="14" fill="#532034" opacity="0.35"/>
+    <ellipse cx="146" cy="250" rx="44" ry="14" fill="#532034" opacity="0.35"/>
+
+    <g fill="#3d2a2f">
+      <rect x="22" y="160" width="36" height="90" rx="16"/>
+      <rect x="126" y="160" width="36" height="90" rx="16"/>
+      <circle cx="40" cy="136" r="24"/>
+      <circle cx="144" cy="136" r="24"/>
+      <path d="M58 188c26-18 44-19 68 0" stroke="#3d2a2f" stroke-width="20" stroke-linecap="round" fill="none"/>
+    </g>
+
+    <path d="M103 165c6 12 17 20 31 20 17 0 31-14 31-31 0-17-14-31-31-31-14 0-25 8-31 20-6-12-17-20-31-20-17 0-31 14-31 31 0 17 14 31 31 31 14 0 25-8 31-20z" fill="#ff7fa2"/>
+
+    <g fill="#ffd2de" opacity="0.9">
+      <circle cx="16" cy="90" r="4"/>
+      <circle cx="180" cy="82" r="5"/>
+      <circle cx="196" cy="116" r="3"/>
+      <circle cx="-6" cy="116" r="3"/>
+    </g>
+  </g>
+
+  <text x="600" y="705" font-family="'Playfair Display', serif" font-size="52" text-anchor="middle" fill="#fff7f8" opacity="0.95">
+    Valentina, contigo quiero amor bonito y cuidado real
+  </text>
+</svg>
